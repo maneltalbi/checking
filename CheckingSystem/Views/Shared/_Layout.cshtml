@@ -1,17 +1,17 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Edmin</title>
-        <link type="text/css" href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link type="text/css" href="~/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
-        <link type="text/css" href="~/css/theme.css" rel="stylesheet">
-        <link type="text/css" href="~/images/icons/css/font-awesome.css" rel="stylesheet">
-        <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
-              rel='stylesheet'>
-    </head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edmin</title>
+    <link type="text/css" href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link type="text/css" href="~/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link type="text/css" href="~/css/theme.css" rel="stylesheet">
+    <link type="text/css" href="~/images/icons/css/font-awesome.css" rel="stylesheet">
+    <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
+    <lik href="~/FontAwesome/css/all.css" rel="stylesheet" />
+</head>
     <body>
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -34,7 +34,7 @@
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">All</a></li>
+                                    <li><a href="/Incidents/Index">All</a></li>
                                     <li><a href="#">Add new</a></li>
                                     <li class="divider"></li>
                                     <li class="nav-header">Assigned to me</li>
@@ -66,63 +66,61 @@
         <div class="wrapper">
             <div class="container">
                 <div class="row">
-                    <div class="span3">
+                    <div class="span2">
                         <div class="sidebar">
                             <ul class="widget widget-menu unstyled">
                                 <li class="active">
-                                    <a href="">
-                                        <i class="menu-icon icon-dashboard"></i>Incidents
+                                    <a href="" align="center">
+                                        <i class=""></i>Incidents
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="activity.html"><i class="menu-icon icon-bullhorn"></i>New Incident </a>
+                                    <a href="activity.html"><i class="menu-icon icon-book"></i>New Incident </a>
                                 </li>
                                 <li>
-                                    <a href="message.html">
-                                        <i class="menu-icon icon-inbox"></i>All  <b class="label green pull-right">
-                                            11
-                                        </b>
+                                    <a href="/Incidents/Index">
+                                        <i class="menu-icon icon-paste"></i>All
                                     </a>
                                 </li>
                                 <li>
                                     <a href="task.html">
-                                        <i class="menu-icon icon-tasks"></i>Assigned to me <b class="label orange pull-right">
-                                            19
-                                        </b>
+                                        <i class="menu-icon icon-inbox"></i>Assigned to me
                                     </a>
                                 </li>
-                            </ul>
-
-                            <!--/.widget-nav-->
-
-
-                            <ul class="widget widget-menu unstyled">
-                                <li><a href=""><i class="menu-icon icon-bold"></i> Users </a></li>
-                                <li><a href=""><i class="menu-icon icon-book"></i>Add new </a></li>
-                                <li><a href=""><i class="menu-icon icon-paste"></i>All </a></li>
-                                
-                            </ul>
-                            <!--/.widget-nav-->
-                            <ul class="widget widget-menu unstyled">
                                 <li>
-                                    <a class="collapsed" data-toggle="collapse" href="#togglePages">
-                                        <i class="menu-icon icon-cog">
-                                        </i><i class="icon-chevron-down pull-right"></i><i class="icon-chevron-up pull-right">
-                                        </i>Support Agent
+                                    <a href="task.html">
+                                        <i class="menu-icon icon-inbox"></i>Resolved
                                     </a>
-                                    <ul id="togglePages" class="collapse unstyled">
-                                        <li><a href="~/other-login.html"><i class="icon-inbox"></i>Login </a></li>
-                                        <li><a href="~/other-user-profile.html"><i class="icon-inbox"></i>Profile </a></li>
-                                        <li><a href="~/other-user-listing.html"><i class="icon-inbox"></i>All Users </a></li>
-                                    </ul>
                                 </li>
-                                <li><a href="/Identity/Account/Logout"><i class="menu-icon icon-signout"></i>Logout </a></li>
+                            </ul>
+
+                            <!--/.widget-nav-->
+
+
+                            <ul class="widget widget-menu unstyled">
+                                <li><a href="/Users/Index" align="center"><i class=""></i> Users </a></li>
+                                <li><a href="/Users/Create"><i class="menu-icon icon-book"></i>Add new </a></li>
+                                <li><a href="/Users/Index"><i class="menu-icon icon-paste"></i>All </a></li>
+
+                            </ul>
+                            <ul class="widget widget-menu unstyled">
+                                <li><a href="/SupportAgents/Index" align="center"><i class=""></i> Support Agent </a></li>
+                                <li><a href="/SupportAgents/Create"><i class="menu-icon icon-book"></i>Add new </a></li>
+                                <li><a href="/SupportAgents/Index"><i class="menu-icon icon-paste"></i>All </a></li>
+
+                            </ul>
+                            <ul class="widget widget-menu unstyled">
+                                <li><a href="/SupportAgents/Index" align="center"><i class=""></i> Incidents Categories </a></li>
+                                <li><a href="/Categories/Index"><i class="menu-icon icon-book"></i>Categories </a></li>
+                                <li><a href="/SubCategories/Index"><i class="menu-icon icon-paste"></i>SubCategories </a></li>
+
                             </ul>
                         </div>
                         <!--/.sidebar-->
                     </div>
-                    @RenderBody()
                     <!--/.span3-->
+                    @RenderBody()
+
                     <!--/.span9-->
                 </div>
             </div>

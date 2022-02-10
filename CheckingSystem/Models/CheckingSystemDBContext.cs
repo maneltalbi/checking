@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CheckingSystem.Models;
 
 namespace CheckingSystem.Models
 {
@@ -18,6 +19,7 @@ namespace CheckingSystem.Models
         public DbSet<Users> Users { get; set; }
         public DbSet<SupportAgents> SupportAgents { get; set; }
         public DbSet<Incidents> Incidents { get; set; }
+        public DbSet<CheckingSystem.Models.SubCategories> SubCategories { get; set; }
 
     }
 }

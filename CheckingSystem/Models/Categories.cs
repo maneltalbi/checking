@@ -11,6 +11,7 @@ namespace CheckingSystem.Models
         [Key]
         public int IdCat{ get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public List<SubCategories> SubCategories { get; set; }
         public List<Incidents> Incident { get; set; }
     }

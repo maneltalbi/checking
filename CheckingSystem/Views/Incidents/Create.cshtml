@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/assets/plugins/jquery/js/jquery.min.js"></script>
 <br/><br />
      <center>
          <div class="span10">
@@ -18,18 +18,18 @@
                      <div class="span3">
                          <div class="form-group">
                              <label asp-for="Caller" class="control-label"></label>
-                             <select asp-for="IdUser" class="form-control" asp-items="ViewBag.IdUser"></select>
+                             <select asp-for="Caller" class="form-control" asp-items="ViewBag.IdUser"></select>
                              <span asp-validation-for="Caller" class="text-danger"></span>
                          </div>
                          <div class="form-group">
                              <label asp-for="Category" class="control-label"></label>
-                             <select asp-for="IdCat" class="form-control" asp-items="ViewBag.IdCat"></select>
+                             <select id="ddlCategories" asp-for="Category" class="form-control" asp-items="@(new SelectList(ViewBag.CategoriesList,"Value","Text"))"></select>
 
                          </div>
                          
                          <div class="form-group">
                              <label asp-for="Subcategory" class="control-label"></label>
-                             <select asp-for="Subcategory" class="form-control" asp-items="ViewBag.SubCat"></select>
+                             <select id="ddlSubCategories" asp-for="Subcategory" class="form-control" asp-items="@(new SelectList(string.Empty, "Value","Text"))"></select>
 
                          </div>
                              <div class="form-group">
@@ -69,7 +69,7 @@
                        
                          <div class="form-group">
                              <label asp-for="AssignementTo" class="control-label"></label>
-                             <select asp-for="IdAgent" class="form-control" asp-items="ViewBag.IdAgent"></select>
+                             <select asp-for="AssignementTo" class="form-control" asp-items="ViewBag.IdAgent"></select>
                          </div>
                         
                              <div class="form-group">
@@ -83,22 +83,26 @@
                                  <span asp-validation-for="UbdatedBy" class="text-danger"></span>
                              </div>
                          </div>
-                         <div class="span4">
-                             
-                             
-                             <div class="form-group">
-                                 <label asp-for="Idadmin" class="control-label"></label>
-                                 <select asp-for="Idadmin" class="form-control" asp-items="ViewBag.Idadmin"></select>
-                             </div>
-                             
-                             <div class="form-group">
-                                 <input type="submit" value="Create" class="btn btn-primary" />
-                             </div>
-                             <div>
-                                 <a asp-action="Index">Back to List</a>
-                             </div>
-
+                     <div class="span4">
+                         <div class="form-group">
+                             <label asp-for="IdCat" class="control-label"></label>
+                             <select asp-for="IdCat" class="form-control" asp-items="ViewBag.IdCat"></select>
                          </div>
+
+                         
+                         <div class="form-group">
+                             <label asp-for="Idadmin" class="control-label"></label>
+                             <select asp-for="Idadmin" class="form-control" asp-items="ViewBag.Idadmin"></select>
+                         </div>
+
+                         <div class="form-group">
+                             <input type="submit" value="Create" class="btn btn-primary" />
+                         </div>
+                         <div>
+                             <a asp-action="Index">Back to List</a>
+                         </div>
+
+                     </div>
                         
                          </div>
 </form>
@@ -109,6 +113,21 @@
          </div>
      </center>
 
+<script>
 
+    $(function (){
+        $("#ddlCategories").change(function () {
+            $.getJSON("/Incidents/GetSubCategoriesList", { catid: $("#ddlCategories").val() }, function (d) {
+                var row = "";
+                $("#ddlSubCategories").empty();
+                $.each(d, function (i, v) {
+                    row += "<option value=" + v.value + ">"+v.text+"</option>";
+                });
+                $("#ddlSubCategories").html(row);
+            })
+            
+        })
+    })
+</script>
 
 

@@ -6,12 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CheckingSystem.Models;
+using System.Data;
+using System.Data.SqlClient;
+
 
 namespace CheckingSystem.Controllers
 {
     public class IncidentsController : Controller
     {
         private readonly CheckingSystemDBContext _context;
+        database_access_layer.db dbop = new database_access_layer.db();
+           
 
         public IncidentsController(CheckingSystemDBContext context)
         {
@@ -55,8 +60,25 @@ namespace CheckingSystem.Controllers
             ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "FirstName");
             ViewData["IdAgent"] = new SelectList(_context.SupportAgents, "IdAgent", "FirstName");
             ViewData["IdSubCat"] = new SelectList(_context.SubCategories, "IdSubCat", "Name");
-            
+            DataSet ds = dbop.GetCategories();
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach(DataRow dr in ds.Tables[0].Rows)
+            {
+                list.Add(new SelectListItem { Text = dr["Name"].ToString(), Value = dr["IdCat"].ToString()});
+            }
+            ViewBag.CategoriesList = list;
+
             return View();
+        }
+        public JsonResult GetSubCategoriesList(int catid)
+        {
+            DataSet ds = dbop.GetSubCategories(catid);
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                list.Add(new SelectListItem { Text = dr["Name"].ToString(), Value = dr["IdSubCat"].ToString()});
+            }
+            return Json(list);
         }
 
         // POST: Incidents/Create

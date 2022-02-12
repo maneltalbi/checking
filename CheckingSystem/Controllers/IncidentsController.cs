@@ -59,7 +59,6 @@ namespace CheckingSystem.Controllers
             ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "FirstName");
             ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "FirstName");
             ViewData["IdAgent"] = new SelectList(_context.SupportAgents, "IdAgent", "FirstName");
-            ViewData["IdSubCat"] = new SelectList(_context.SubCategories, "IdSubCat", "Name");
             DataSet ds = dbop.GetCategories();
             List<SelectListItem> list = new List<SelectListItem>();
             foreach(DataRow dr in ds.Tables[0].Rows)
@@ -98,6 +97,7 @@ namespace CheckingSystem.Controllers
             ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "FirstName", incidents.IdUser);
             ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "FirstName", incidents.Idadmin);
             ViewData["IdAgent"] = new SelectList(_context.SupportAgents, "IdAgent", "FirstName", incidents.IdAgent);
+
 
             return View(incidents);
         }

@@ -11,6 +11,7 @@ namespace CheckingSystem.Models
     {
         [Key]
         public int IdInc { get; set; }
+        public string Number { get; set; }
         public string Caller { get; set; }
         public string Category { get; set; }
         public string Subcategory { get; set; }

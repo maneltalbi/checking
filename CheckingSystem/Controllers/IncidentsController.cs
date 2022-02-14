@@ -52,13 +52,28 @@ namespace CheckingSystem.Controllers
         }
 
         // GET: Incidents/Create
-        public IActionResult Create()
+        public IActionResult Create(int id=0)
         {
             
             ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "Name");
             ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "FirstName");
             ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "FirstName");
             ViewData["IdAgent"] = new SelectList(_context.SupportAgents, "IdAgent", "FirstName");
+            Incidents inc = new Incidents();
+            var lastincident = _context.Incidents.OrderByDescending(c => c.IdInc).FirstOrDefault();
+            if(id!=0)
+            {
+                inc = _context.Incidents.Where(x => x.IdInc == id).FirstOrDefault<Incidents>();
+            }
+            else if(lastincident==null)
+            {
+                inc.Number = "INC0001";
+            }
+            else
+            {
+                inc.Number = "INC" + (Convert.ToInt32(lastincident.Number.Substring(6, lastincident.Number.Length - 6)) + 1).ToString("D3");
+            }
+
             DataSet ds = dbop.GetCategories();
             List<SelectListItem> list = new List<SelectListItem>();
             foreach(DataRow dr in ds.Tables[0].Rows)
@@ -67,7 +82,7 @@ namespace CheckingSystem.Controllers
             }
             ViewBag.CategoriesList = list;
 
-            return View();
+            return View(inc);
         }
         public JsonResult GetSubCategoriesList(int catid)
         {
@@ -85,7 +100,7 @@ namespace CheckingSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdInc,Caller,Category,Subcategory,BusinessService,Description,ContactType,state,priority,AssignementGroup,AssignementTo,Updatedate,UbdatedBy,IdCat,IdUser,Idadmin,IdAgent")] Incidents incidents)
+        public async Task<IActionResult> Create([Bind("IdInc,Caller,Category,Subcategory,BusinessService,Description,ContactType,state,priority,AssignementGroup,AssignementTo,Updatedate,UbdatedBy,IdCat,IdUser,Idadmin,IdAgent,Number")] Incidents incidents)
         {
             if (ModelState.IsValid)
             {
@@ -128,7 +143,7 @@ namespace CheckingSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdInc,Caller,Category,Subcategory,BusinessService,Description,ContactType,state,priority,AssignementGroup,AssignementTo,Updatedate,UbdatedBy,IdCat,IdUser,Idadmin,IdAgent")] Incidents incidents)
+        public async Task<IActionResult> Edit(int id, [Bind("IdInc,Caller,Category,Subcategory,BusinessService,Description,ContactType,state,priority,AssignementGroup,AssignementTo,Updatedate,UbdatedBy,IdCat,IdUser,Idadmin,IdAgent,Number")] Incidents incidents)
         {
             if (id != incidents.IdInc)
             {

@@ -18,6 +18,11 @@
                 <input type="hidden" asp-for="IdInc" />
                 <div class="span3">
                     <div class="form-group">
+                        <label asp-for="Number" class="control-label"></label>
+                        <input asp-for="Number" class="form-control" />
+                        <span asp-validation-for="Number" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="Caller" class="control-label"></label>
                         <input asp-for="Caller" class="form-control" />
                         <span asp-validation-for="Caller" class="text-danger"></span>
@@ -42,13 +47,14 @@
                         <input asp-for="Description" class="form-control" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
+                </div>
+                <div class="span3">
                     <div class="form-group">
                         <label asp-for="ContactType" class="control-label"></label>
                         <input asp-for="ContactType" class="form-control" />
                         <span asp-validation-for="ContactType" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="span3">
+
                     <div class="form-group">
                         <label asp-for="state" class="control-label"></label>
                         <input asp-for="state" class="form-control" />
@@ -74,14 +80,14 @@
                         <input asp-for="Updatedate" class="form-control" />
                         <span asp-validation-for="Updatedate" class="text-danger"></span>
                     </div>
-
+                </div>
+                <div class="span3">
                     <div class="form-group">
                         <label asp-for="UbdatedBy" class="control-label"></label>
                         <input asp-for="UbdatedBy" class="form-control" />
                         <span asp-validation-for="UbdatedBy" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="span3">
+
                     <div class="form-group">
                         <label asp-for="IdCat" class="control-label"></label>
                         <select asp-for="IdCat" class="form-control" asp-items="ViewBag.IdCat"></select>
@@ -98,8 +104,8 @@
                         <span asp-validation-for="Idadmin" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="IdAgent" class="control-label"></label>
-                        <input asp-for="IdAgent" class="form-control" />
+                        <label asp-for="agent" class="control-label"></label>
+                        <select asp-for="IdAgent" class="form-control" asp-items="ViewBag.IdAgent"></select>
                         <span asp-validation-for="IdAgent" class="text-danger"></span>
                     </div>
                     <div class="form-group">

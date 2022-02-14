@@ -4,6 +4,7 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/assets/plugins/jquery/js/jquery.min.js"></script>
 
 <br />
 <br />
@@ -27,15 +28,16 @@
                         <input asp-for="Caller" class="form-control" />
                         <span asp-validation-for="Caller" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label asp-for="Category" class="control-label"></label>
-                        <input asp-for="Category" class="form-control" />
-                        <span asp-validation-for="Category" class="text-danger"></span>
+                        <select id="ddlCategories" asp-for="Category" class="form-control" asp-items="@(new SelectList(ViewBag.CategoriesList,"Value","Text"))"></select>
+
                     </div>
                     <div class="form-group">
                         <label asp-for="Subcategory" class="control-label"></label>
-                        <input asp-for="Subcategory" class="form-control" />
-                        <span asp-validation-for="Subcategory" class="text-danger"></span>
+                        <select id="ddlSubCategories" asp-for="Subcategory" class="form-control" asp-items="@(new SelectList(string.Empty, "Value","Text"))"></select>
+
                     </div>
                     <div class="form-group">
                         <label asp-for="BusinessService" class="control-label"></label>
@@ -114,9 +116,25 @@
                     </div>
                 </div>
             </form>
-                </div>
-            </div>
+        </div>
+    </div>
 
-        
-  
-        </center>
+
+
+</center>
+<script>
+
+    $(function () {
+        $("#ddlCategories").change(function () {
+            $.getJSON("/Incidents/GetSubCategoriesList", { catid: $("#ddlCategories").val() }, function (d) {
+                var row = "";
+                $("#ddlSubCategories").empty();
+                $.each(d, function (i, v) {
+                    row += "<option value=" + v.value + ">" + v.text + "</option>";
+                });
+                $("#ddlSubCategories").html(row);
+            })
+
+        })
+    })
+</script>

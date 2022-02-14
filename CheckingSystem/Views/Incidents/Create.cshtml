@@ -20,6 +20,7 @@
                              @Html.LabelFor(model=>model.Number,htmlAttributes: new { @class = "control-label col-md-2"})
                              @Html.EditorFor(model=>model.Number, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                             @Html.ValidationMessageFor(model=>model.Number)
+                             <span asp-validation-for="Number" class="text-danger"></span>
                          </div>
                          <div class="form-group">
                              <label asp-for="Caller" class="control-label"></label>

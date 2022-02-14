@@ -71,7 +71,7 @@ namespace CheckingSystem.Controllers
             }
             else
             {
-                inc.Number = "INC" + (Convert.ToInt32(lastincident.Number.Substring(6, lastincident.Number.Length - 6)) + 1).ToString("D3");
+                inc.Number = "INC" + (Convert.ToInt32(lastincident.Number.Substring(6, lastincident.Number.Length - 6)) + 1).ToString("D4");
             }
 
             DataSet ds = dbop.GetCategories();
@@ -134,6 +134,13 @@ namespace CheckingSystem.Controllers
             ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "FirstName", incidents.IdUser);
             ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "FirstName", incidents.Idadmin);
             ViewData["IdAgent"] = new SelectList(_context.SupportAgents, "IdAgent", "FirstName", incidents.IdAgent);
+             DataSet ds = dbop.GetCategories();
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach(DataRow dr in ds.Tables[0].Rows)
+            {
+                list.Add(new SelectListItem { Text = dr["Name"].ToString(), Value = dr["IdCat"].ToString()});
+            }
+            ViewBag.CategoriesList = list;
 
             return View(incidents);
         }

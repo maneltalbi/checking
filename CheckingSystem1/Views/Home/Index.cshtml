@@ -1,0 +1,25 @@
+﻿@model IEnumerable<CheckingSystem1.Models.admin>
+
+@if (User.Identity.IsAuthenticated)
+{
+
+<div class="container">
+    <center>
+        <h2>Welcome to your Space</h2>
+    </center>
+    
+    </div>
+    }
+    else
+    {
+
+    <div class="card">
+        <div class="card-body text-center">
+            <div class="mb-4">
+                <i class="feather icon-mail auth-icon"></i>
+            </div>
+            <h3 class="mb-4"><a href="/Identity/Account/Login">Sign In</a></h3>
+            <p class="mb-0 text-muted">Don’t have an account? <a href="/Identity/Account/Register">Signup</a></p>
+        </div>
+    </div>
+    }

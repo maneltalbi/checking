@@ -23,14 +23,15 @@
                     <span asp-validation-for="Number" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <div class="form-group">
+                    
                         <label asp-for="Category" class="control-label"></label>
                         <select id="ddlCategories" asp-for="IdCat" class="form-control" asp-items="@(new SelectList(ViewBag.CategoriesList,"Value","Text"))"></select>
 
                     </div>
-
+                <div class="form-group">
                     <label asp-for="Subcategory" class="control-label"></label>
                     <select id="ddlSubCategories" asp-for="Subcategory" class="form-control" asp-items="@(new SelectList(string.Empty, "Value","Text"))"></select>
+
                 </div>
                 <div class="form-group">
                     <label asp-for="BusinessService" class="control-label"></label>
@@ -73,22 +74,22 @@
             </div>
             <div class="span3">
                 <div class="form-group">
-                    <label asp-for="UbdatedBy" class="control-label"></label>
+                    <label asp-for="UbdatedBy" class="control-label">Updated By</label>
                     <input asp-for="UbdatedBy" class="form-control" />
                     <span asp-validation-for="UbdatedBy" class="text-danger"></span>
                 </div>
 
 
                 <div class="form-group">
-                    <label asp-for="IdUser" class="control-label"></label>
+                    <label asp-for="IdUser" class="control-label">Caller</label>
                     <select asp-for="IdUser" class="form-control" asp-items="ViewBag.IdUser"></select>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Idadmin" class="control-label"></label>
+                    <label asp-for="Idadmin" class="control-label">Admin</label>
                     <select asp-for="Idadmin" class="form-control" asp-items="ViewBag.Idadmin"></select>
                 </div>
                 <div class="form-group">
-                    <label asp-for="IdAgent" class="control-label"></label>
+                    <label asp-for="IdAgent" class="control-label">AssignedTO</label>
                     <select asp-for="IdAgent" class="form-control" asp-items="ViewBag.IdAgent"></select>
                 </div>
 

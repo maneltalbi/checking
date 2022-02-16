@@ -24,6 +24,13 @@ namespace CheckingSystem1.Controllers
         // GET: Incidents
         public async Task<IActionResult> Index()
         {
+            ViewBag.subcatlist = _context.SubCategories.ToList();
+            var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
+            return View(await checkingSystemDBContext.ToListAsync());
+        }
+        public async Task<IActionResult> Resolved()
+        {
+            ViewBag.subcatlist = _context.SubCategories.ToList();
             var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
             return View(await checkingSystemDBContext.ToListAsync());
         }
@@ -46,6 +53,8 @@ namespace CheckingSystem1.Controllers
             {
                 return NotFound();
             }
+            ViewBag.subcatlist = _context.SubCategories.ToList();
+
 
             return View(incidents);
         }
@@ -57,6 +66,10 @@ namespace CheckingSystem1.Controllers
             ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "LastName");
             ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "Name");
             ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "LastName");
+       
+
+
+
             Incidents inc = new Incidents();
             var lastincident = _context.Incidents.OrderByDescending(c => c.IdInc).FirstOrDefault();
             if (id != 0)
@@ -105,10 +118,10 @@ namespace CheckingSystem1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdAgent"] = new SelectList(_context.SupportAgents, "IdAgent", "IdAgent", incidents.IdAgent);
-            ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "IdUser", incidents.IdUser);
-            ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "IdCat", incidents.IdCat);
-            ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "IdAdmin", incidents.Idadmin);
+            ViewData["IdAgent"] = new SelectList(_context.SupportAgents, "IdAgent", "LastName", incidents.IdAgent);
+            ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "LastName", incidents.IdUser);
+            ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "Name", incidents.IdCat);
+            ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "LastName", incidents.Idadmin);
             return View(incidents);
         }
 
@@ -125,10 +138,17 @@ namespace CheckingSystem1.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdAgent"] = new SelectList(_context.SupportAgents, "IdAgent", "IdAgent", incidents.IdAgent);
-            ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "IdUser", incidents.IdUser);
-            ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "IdCat", incidents.IdCat);
-            ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "IdAdmin", incidents.Idadmin);
+            ViewData["IdAgent"] = new SelectList(_context.SupportAgents, "IdAgent", "LastName", incidents.IdAgent);
+            ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "LastName", incidents.IdUser);
+            ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "Name", incidents.IdCat);
+            ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "LastName", incidents.Idadmin);
+            DataSet ds = dbop.GetCategories();
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                list.Add(new SelectListItem { Text = dr["Name"].ToString(), Value = dr["IdCat"].ToString() });
+            }
+            ViewBag.CategoriesList = list;
             return View(incidents);
         }
 
@@ -164,10 +184,10 @@ namespace CheckingSystem1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdAgent"] = new SelectList(_context.SupportAgents, "IdAgent", "IdAgent", incidents.IdAgent);
-            ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "IdUser", incidents.IdUser);
-            ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "IdCat", incidents.IdCat);
-            ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "IdAdmin", incidents.Idadmin);
+            ViewData["IdAgent"] = new SelectList(_context.SupportAgents, "IdAgent", "LastName", incidents.IdAgent);
+            ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "LastNAme", incidents.IdUser);
+            ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "Name", incidents.IdCat);
+            ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "LastName", incidents.Idadmin);
             return View(incidents);
         }
 

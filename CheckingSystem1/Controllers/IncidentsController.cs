@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CheckingSystem1.Models;
 using System.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace CheckingSystem1.Controllers
 {
@@ -35,28 +36,12 @@ namespace CheckingSystem1.Controllers
             return View(await checkingSystemDBContext.ToListAsync());
         }
 
-        // GET: Incidents/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> AssignedToMe()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var incidents = await _context.Incidents
-                .Include(i => i.AssignementTo)
-                .Include(i => i.Caller)
-                .Include(i => i.Category)
-                .Include(i => i.admin)
-                .FirstOrDefaultAsync(m => m.IdInc == id);
-            if (incidents == null)
-            {
-                return NotFound();
-            }
             ViewBag.subcatlist = _context.SubCategories.ToList();
-
-
-            return View(incidents);
+            var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
+            return View(await checkingSystemDBContext.ToListAsync());
+            
         }
 
         // GET: Incidents/Create

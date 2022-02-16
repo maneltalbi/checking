@@ -25,10 +25,23 @@ namespace CheckingSystem1.Controllers
         // GET: Incidents
         public async Task<IActionResult> Index()
         {
+            List<Incidents> list = new List<Incidents>();
+            list = _context.Incidents.ToList();
+            List<int> repartition = new List<int>();
+            var cat = list.Select(x => x.Category).Distinct();
+            foreach (var item in cat)
+            {
+                repartition.Add(list.Count(x => x.Category ==item));
+            }
+            var rep = repartition;
+            ViewBag.cat = cat;
+            ViewBag.rep = repartition.ToList();
             ViewBag.subcatlist = _context.SubCategories.ToList();
             var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
             return View(await checkingSystemDBContext.ToListAsync());
+
         }
+        
         public async Task<IActionResult> Resolved()
         {
             ViewBag.subcatlist = _context.SubCategories.ToList();
@@ -51,10 +64,6 @@ namespace CheckingSystem1.Controllers
             ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "LastName");
             ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "Name");
             ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "LastName");
-       
-
-
-
             Incidents inc = new Incidents();
             var lastincident = _context.Incidents.OrderByDescending(c => c.IdInc).FirstOrDefault();
             if (id != 0)

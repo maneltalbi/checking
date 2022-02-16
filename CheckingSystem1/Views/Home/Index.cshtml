@@ -1,25 +1,55 @@
-﻿@model IEnumerable<CheckingSystem1.Models.admin>
+﻿@model IEnumerable<CheckingSystem1.Models.Incidents>
+
 
 @if (User.Identity.IsAuthenticated)
 {
 
-<div class="container">
-    <center>
-        <h2>Welcome to your Space</h2>
-    </center>
-    
-    </div>
-    }
-    else
-    {
+<div class="span10">
+   <div id="chart_container">
+       <canvas id="bar_chart"></canvas>
+   </div>
+</div> 
 
-    <div class="card">
-        <div class="card-body text-center">
-            <div class="mb-4">
-                <i class="feather icon-mail auth-icon"></i>
-            </div>
-            <h3 class="mb-4"><a href="/Identity/Account/Login">Sign In</a></h3>
-            <p class="mb-0 text-muted">Don’t have an account? <a href="/Identity/Account/Register">Signup</a></p>
+}
+            else
+            {
+
+<div class="card">
+    <div class="card-body text-center">
+        <div class="mb-4">
+            <i class="feather icon-mail auth-icon"></i>
         </div>
+        <h3 class="mb-4"><a href="/Identity/Account/Login">Sign In</a></h3>
+        <p class="mb-0 text-muted">Don’t have an account? <a href="/Identity/Account/Register">Signup</a></p>
     </div>
-    }
+</div>}
+
+<script>
+    var repArray = JSON.parse("@Html.Raw(Json.Serialize(ViewBag.rep))");
+       var cat = JSON.parse("@Html.Raw(Json.Serialize(ViewBag.cat))");
+    var ctx = $("#bar_chart");
+    var catChar = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: Categories,
+            datasets: [{
+                label: "bar chart incidents Categories",
+                data: repArray,
+                backgroundColor: ["rgba(242,166,54,.5)", "rgba(145,65,72,92,.5)", "(74,25,92,.5)"],
+                borderColor: ["rgb(242,166,54)", "rgb(145,65,72)", "rgb(74,25,92)"],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                YAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+            
+        }
+    });
+</script>

@@ -25,17 +25,7 @@ namespace CheckingSystem1.Controllers
         // GET: Incidents
         public async Task<IActionResult> Index()
         {
-            List<Incidents> list = new List<Incidents>();
-            list = _context.Incidents.ToList();
-            List<int> repartition = new List<int>();
-            var cat = list.Select(x => x.Category).Distinct();
-            foreach (var item in cat)
-            {
-                repartition.Add(list.Count(x => x.Category ==item));
-            }
-            var rep = repartition;
-            ViewBag.cat = cat;
-            ViewBag.rep = repartition.ToList();
+           
             ViewBag.subcatlist = _context.SubCategories.ToList();
             var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
             return View(await checkingSystemDBContext.ToListAsync());

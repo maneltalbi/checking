@@ -5,10 +5,20 @@
 {
 
 <div class="span10">
-   <div id="chart_container">
-       <canvas id="bar_chart"></canvas>
-   </div>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <figure class="highcharts-figure">
+        <div id="container"></div>
+        <p class="highcharts-description">
+            This pie chart shows how the chart legend can be used to provide
+            information about the individual slices.
+        </p>
+    </figure>
 </div> 
+<script src="~/scripts/dashboard.js"></script>
 
 }
             else
@@ -24,32 +34,10 @@
     </div>
 </div>}
 
-<script>
-    var repArray = JSON.parse("@Html.Raw(Json.Serialize(ViewBag.rep))");
-       var cat = JSON.parse("@Html.Raw(Json.Serialize(ViewBag.cat))");
-    var ctx = $("#bar_chart");
-    var catChar = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: Categories,
-            datasets: [{
-                label: "bar chart incidents Categories",
-                data: repArray,
-                backgroundColor: ["rgba(242,166,54,.5)", "rgba(145,65,72,92,.5)", "(74,25,92,.5)"],
-                borderColor: ["rgb(242,166,54)", "rgb(145,65,72)", "rgb(74,25,92)"],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            maintainAspectRatio: false,
-            scales: {
-                YAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-            
-        }
-    });
-</script>
+@section scripts{ 
+<script srs="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+
+
+}

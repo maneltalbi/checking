@@ -6,16 +6,26 @@ using System.Data;
 using System.Data.SqlClient;
 using Microsoft.Data.SqlClient;
 
+
 namespace CheckingSystem1.database_access_layer
 {
     public class db
     {
-
-        SqlConnection con = new SqlConnection("Server=.;Database=CheckingSystem;Trusted_Connection=True;MultipleActiveResultSets=true");
+         SqlConnection con = new SqlConnection("Server=.;Database=CheckingSystem;Trusted_Connection=True;MultipleActiveResultSets=true");
         //Get Country List
         public DataSet GetCategories()
         {
             SqlCommand com = new SqlCommand("Sp_Categories", con);
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            return ds;
+
+        }
+        public DataSet GetIncidents()
+        {
+            SqlCommand com = new SqlCommand("Sp_Incidents1", con);
             com.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter da = new SqlDataAdapter(com);
             DataSet ds = new DataSet();

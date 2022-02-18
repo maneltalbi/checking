@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using CheckingSystem1.Models;
 using System.Data;
 using Microsoft.AspNetCore.Identity;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace CheckingSystem1.Controllers
 {
@@ -23,15 +25,47 @@ namespace CheckingSystem1.Controllers
         }
 
         // GET: Incidents
-        public async Task<IActionResult> Index()
+        public  IActionResult Index(string incsearch)
         {
-           
+            string mainconn = ConfigurationManager.ConnectionStrings["CheckingSystem"].ConnectionString;
+            SqlConnection sqlconn = new SqlConnection(mainconn);
+            string sqlquery = "select * from [dbo].[Incidents] where Number like '%" + incsearch + "%'";
+            SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
+            sqlconn.Open();
+           SqlDataAdapter sda = new SqlDataAdapter(sqlcomm);
+            DataSet ds = new DataSet();
+            sda.Fill(ds);
+            List<Incidents> inc = new List<Incidents>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                inc.Add(new Incidents
+                {
+                    Number = Convert.ToString(dr["Number"]),
+                    Subcategory = Convert.ToString(dr["Subcategory"]),
+                    BusinessService = Convert.ToString(dr["BusinessService"]),
+                    Description = Convert.ToString(dr["Description"]),
+                    ContactType = Convert.ToString(dr["ContactType"]),
+                    state = Convert.ToString(dr["state"]),
+                    priority = Convert.ToString(dr["priority"]),
+                    AssignementGroup = Convert.ToString(dr["AssignementGroup"]),
+                    Updatedate = Convert.ToDateTime(dr["Updatedate"]),
+                    UbdatedBy = Convert.ToString(dr["UbdatedBy"]),
+                    IdCat = Convert.ToInt32(dr["IdCat"]),
+                    IdUser = Convert.ToInt32(dr["IdUser"]),
+                    Idadmin = Convert.ToInt32(dr["Idadmin"]),
+                    IdAgent = Convert.ToInt32(dr["IdAgent"]),
+
+                });
+            }
+            sqlconn.Close();
+            ModelState.Clear();
+       
+
             ViewBag.subcatlist = _context.SubCategories.ToList();
-            var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
-            return View(await checkingSystemDBContext.ToListAsync());
+            return View(inc);
 
         }
-        
+       
         public async Task<IActionResult> Resolved()
         {
             ViewBag.subcatlist = _context.SubCategories.ToList();

@@ -3,22 +3,48 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-
 <div class="span10">
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-
-    <figure class="highcharts-figure">
-        <div id="container"></div>
-        <p class="highcharts-description">
-            This pie chart shows how the chart legend can be used to provide
-            information about the individual slices.
-        </p>
-    </figure>
-</div> 
-<script src="~/scripts/dashboard.js"></script>
+    <div class="span4">
+        <ul class="widget widget-usage unstyled span4">
+            <li>
+                <p>
+                    <strong>Software</strong> <span class="pull-right small muted">78%</span>
+                </p>
+                <div class="progress tight">
+                    <div class="bar" style="width: 78%;">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <p>
+                    <strong>Hardware</strong> <span class="pull-right small muted">56%</span>
+                </p>
+                <div class="progress tight">
+                    <div class="bar bar-success" style="width: 56%;">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <p>
+                    <strong>Network</strong> <span class="pull-right small muted">44%</span>
+                </p>
+                <div class="progress tight">
+                    <div class="bar bar-warning" style="width: 44%;">
+                    </div>
+                </div>
+            </li>
+            <li>
+                <p>
+                    <strong>Database</strong> <span class="pull-right small muted">67%</span>
+                </p>
+                <div class="progress tight">
+                    <div class="bar bar-danger" style="width: 67%;">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
 
 }
             else
@@ -35,9 +61,7 @@
 </div>}
 
 @section scripts{ 
-<script srs="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-
-
-
+    
+            
+             
 }

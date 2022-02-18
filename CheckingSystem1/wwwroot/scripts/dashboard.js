@@ -3,8 +3,16 @@
         type: "post",
         url: 'Home/Dashboardcount',
         data: JSON.stringify({}),
-        contentType: "json",
+        contentType: "application/json:chaset=utf-8",
+        dataType: "json",
         success: function (json) {
+            debugger
+            var values = json.Dashboardcount;
+            var softwarecount = parseInt(values[0]);
+            var hardwarecount = parseInt(values[1]);
+            var networkcount = parseInt(values[2]);
+            var databasecount = parseInt(values[3]);
+
 
         }
     })

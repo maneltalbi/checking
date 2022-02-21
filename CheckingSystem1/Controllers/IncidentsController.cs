@@ -25,7 +25,7 @@ namespace CheckingSystem1.Controllers
         }
 
         // GET: Incidents
-        public async Task<IActionResult> Index( )
+        public IActionResult Index( string SearchText = "")
         {
           ViewBag.subcatlist = _context.SubCategories.ToList();
             List<Incidents> list = new List<Incidents>();
@@ -42,8 +42,15 @@ namespace CheckingSystem1.Controllers
 
                 }
               }
+            List<Incidents> incident;
+            if (SearchText != "" && SearchText != null)
+            {
+                incident = _context.Incidents.Where(inc => inc.Number.Contains(SearchText)).ToList();
+            }
+            else
+                incident = _context.Incidents.ToList();
             var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
-            return View(await checkingSystemDBContext.ToListAsync());
+            return View(incident);
 
         }
        

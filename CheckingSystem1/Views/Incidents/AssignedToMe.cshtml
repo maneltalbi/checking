@@ -62,7 +62,7 @@
         <tbody>
             @foreach (var item in Model)
             {
-                @if (User.Identity.Name==item.Caller.Email)
+                @if (User.Identity.Name==item.AssignementTo.Email)
                 {
                     <tr>
                         <td>

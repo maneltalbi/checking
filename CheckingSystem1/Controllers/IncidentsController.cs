@@ -25,44 +25,25 @@ namespace CheckingSystem1.Controllers
         }
 
         // GET: Incidents
-        public  IActionResult Index(string incsearch)
+        public async Task<IActionResult> Index( )
         {
-            string mainconn = ConfigurationManager.ConnectionStrings["CheckingSystem"].ConnectionString;
-            SqlConnection sqlconn = new SqlConnection(mainconn);
-            string sqlquery = "select * from [dbo].[Incidents] where Number like '%" + incsearch + "%'";
-            SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
-            sqlconn.Open();
-           SqlDataAdapter sda = new SqlDataAdapter(sqlcomm);
-            DataSet ds = new DataSet();
-            sda.Fill(ds);
-            List<Incidents> inc = new List<Incidents>();
-            foreach (DataRow dr in ds.Tables[0].Rows)
-            {
-                inc.Add(new Incidents
-                {
-                    Number = Convert.ToString(dr["Number"]),
-                    Subcategory = Convert.ToString(dr["Subcategory"]),
-                    BusinessService = Convert.ToString(dr["BusinessService"]),
-                    Description = Convert.ToString(dr["Description"]),
-                    ContactType = Convert.ToString(dr["ContactType"]),
-                    state = Convert.ToString(dr["state"]),
-                    priority = Convert.ToString(dr["priority"]),
-                    AssignementGroup = Convert.ToString(dr["AssignementGroup"]),
-                    Updatedate = Convert.ToDateTime(dr["Updatedate"]),
-                    UbdatedBy = Convert.ToString(dr["UbdatedBy"]),
-                    IdCat = Convert.ToInt32(dr["IdCat"]),
-                    IdUser = Convert.ToInt32(dr["IdUser"]),
-                    Idadmin = Convert.ToInt32(dr["Idadmin"]),
-                    IdAgent = Convert.ToInt32(dr["IdAgent"]),
+          ViewBag.subcatlist = _context.SubCategories.ToList();
+            List<Incidents> list = new List<Incidents>();
+             list= _context.Incidents.ToList();
+            DateTime d1 = DateTime.Now;
+            foreach (var item in list) {
+              DateTime  d2 = item.Updatedate;
+                int diffDate = (d1 - d2).Days;
+                if (item.state == "resolved" && diffDate>=6)
+                    {
+                        item.state = "closed";
+                    _context.Update(item);
+                    _context.SaveChanges();
 
-                });
-            }
-            sqlconn.Close();
-            ModelState.Clear();
-       
-
-            ViewBag.subcatlist = _context.SubCategories.ToList();
-            return View(inc);
+                }
+              }
+            var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
+            return View(await checkingSystemDBContext.ToListAsync());
 
         }
        
@@ -78,6 +59,7 @@ namespace CheckingSystem1.Controllers
             ViewBag.subcatlist = _context.SubCategories.ToList();
             var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
             return View(await checkingSystemDBContext.ToListAsync());
+         
             
         }
 

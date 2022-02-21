@@ -10,7 +10,7 @@ using System.Data;
 using Microsoft.AspNetCore.Identity;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using CheckingSystem1.Views.Shared.Components.SearchBar;
 namespace CheckingSystem1.Controllers
 {
     public class IncidentsController : Controller
@@ -25,7 +25,7 @@ namespace CheckingSystem1.Controllers
         }
 
         // GET: Incidents
-        public IActionResult Index( string SearchText = "")
+        public IActionResult Index( string SearchText = "",int pg=1)
         {
           ViewBag.subcatlist = _context.SubCategories.ToList();
             List<Incidents> list = new List<Incidents>();
@@ -49,8 +49,18 @@ namespace CheckingSystem1.Controllers
             }
             else
                 incident = _context.Incidents.ToList();
+            const int pagesize = 5;
+            if (pg < 1)
+                pg = 1;
+            int recsCount = incident.Count();
+            var pager = new Pager(recsCount, pg, pagesize);
+            int recSkip = (pg - 1) * pagesize;
+            var data = incident.Skip(recSkip).Take(pagesize).ToList();
+            this.ViewBag.Pager = pager;
+           
             var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
-            return View(incident);
+            //return View(incident);
+            return View(data);
 
         }
        

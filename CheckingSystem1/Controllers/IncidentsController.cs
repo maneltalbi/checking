@@ -10,7 +10,6 @@ using System.Data;
 using Microsoft.AspNetCore.Identity;
 using System.Data.SqlClient;
 using System.Configuration;
-using CheckingSystem1.Views.Shared.Components.SearchBar;
 namespace CheckingSystem1.Controllers
 {
     public class IncidentsController : Controller

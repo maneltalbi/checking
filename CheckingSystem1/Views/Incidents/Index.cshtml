@@ -84,60 +84,68 @@
             @foreach (var item in Model)
             {
                 intsno = intsno + 1;
-                <tr>
-                    <td>@intsno</td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Number)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Caller.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Category.Name)
-                    </td>
-                    @foreach (var subcat in ViewBag.subcatlist)
+            <tr>
+                <td>@intsno</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                @foreach (var user in ViewBag.userlist)
+                {
+                    if (user.IdUser.ToString() == item.Caller.ToString())
                     {
-                        if (subcat.IdSubCat.ToString() == item.Subcategory)
-                        {
-                            item.Subcategory = subcat.Name;
-                        }
+                        item.Caller = user.LastName;
                     }
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Subcategory)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BusinessService)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ContactType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.state)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.priority)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AssignementGroup)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Updatedate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UbdatedBy)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AssignementTo.FirstName)
-                    </td>
-                    <td align="center">
-                        <a asp-action="Edit" asp-route-id="@item.IdInc" class="btn btn-success"><i class="fa-thin fa-pen-to-square"></i>Edit</a>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Caller.LastName)
+                </td>
 
-                        <a asp-action="Delete" asp-route-id="@item.IdInc" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                @foreach (var subcat in ViewBag.subcatlist)
+                {
+                    if (subcat.IdSubCat.ToString() == item.Subcategory)
+                    {
+                        item.Subcategory = subcat.Name;
+                    }
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subcategory)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BusinessService)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.state)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.priority)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssignementGroup)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Updatedate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UbdatedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssignementTo.LastName)
+                </td>
+                <td align="center">
+                    <a asp-action="Edit" asp-route-id="@item.IdInc" class="btn btn-success"><i class="fa-thin fa-pen-to-square"></i>Edit</a>
+
+                    <a asp-action="Delete" asp-route-id="@item.IdInc" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

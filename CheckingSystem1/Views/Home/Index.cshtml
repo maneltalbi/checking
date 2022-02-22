@@ -8,37 +8,37 @@
         <ul class="widget widget-usage unstyled span4">
             <li>
                 <p>
-                    <strong>Software</strong> <span class="pull-right small muted">78%</span>
+                    <strong>Software</strong> <span class="pull-right small muted">@ViewBag.persoft%</span>
                 </p>
                 <div class="progress tight">
-                    <div class="bar" style="width: 78%;">
+                    <div class="bar" style="width:@(ViewBag.persoft)%;">
                     </div>
                 </div>
             </li>
             <li>
                 <p>
-                    <strong>Hardware</strong> <span class="pull-right small muted">56%</span>
+                    <strong>Hardware</strong> <span class="pull-right small muted">@ViewBag.perhard%</span>
                 </p>
                 <div class="progress tight">
-                    <div class="bar bar-success" style="width: 56%;">
+                    <div class="bar bar-success" style="width:@(ViewBag.perhard)%;">
                     </div>
                 </div>
             </li>
             <li>
                 <p>
-                    <strong>Network</strong> <span class="pull-right small muted">44%</span>
+                    <strong>Network</strong> <span class="pull-right small muted">@ViewBag.pernet%</span>
                 </p>
                 <div class="progress tight">
-                    <div class="bar bar-warning" style="width: 44%;">
+                    <div class="bar bar-warning" style="width:@(ViewBag.pernet)%;">
                     </div>
                 </div>
             </li>
             <li>
                 <p>
-                    <strong>Database</strong> <span class="pull-right small muted">67%</span>
+                    <strong>Database</strong> <span class="pull-right small muted">@ViewBag.perdb%</span>
                 </p>
                 <div class="progress tight">
-                    <div class="bar bar-danger" style="width: 67%;">
+                    <div class="bar bar-danger" style="width:@(ViewBag.perdb)%;">
                     </div>
                 </div>
             </li>

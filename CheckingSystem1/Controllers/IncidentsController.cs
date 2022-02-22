@@ -26,7 +26,10 @@ namespace CheckingSystem1.Controllers
         // GET: Incidents
         public IActionResult Index( string SearchText = "",int pg=1)
         {
-          ViewBag.subcatlist = _context.SubCategories.ToList();
+            ViewBag.catlist = _context.Categories.ToList();
+            ViewBag.userlist = _context.Users.ToList();
+            ViewBag.agentlist = _context.SupportAgents.ToList();
+            ViewBag.subcatlist = _context.SubCategories.ToList();
             List<Incidents> list = new List<Incidents>();
              list= _context.Incidents.ToList();
             DateTime d1 = DateTime.Now;

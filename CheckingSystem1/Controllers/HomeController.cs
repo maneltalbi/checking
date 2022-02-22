@@ -26,9 +26,13 @@ namespace CheckingSystem.Controllers
 
         public IActionResult Index()
         {
+            
+            int usernber = _context.Users.Count();
+            ViewBag.usernber = usernber;
             List<Incidents> incident;
             incident = _context.Incidents.ToList();
             int incnber = _context.Incidents.Count();
+            ViewBag.incnber = incnber;
             int soft = 0;
             int hard = 0;
             int db = 0;

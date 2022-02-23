@@ -51,7 +51,7 @@ namespace CheckingSystem1.Controllers
             }
             else
                 incident = _context.Incidents.ToList();
-            const int pagesize = 5;
+            const int pagesize = 10;
             if (pg < 1)
                 pg = 1;
             int recsCount = incident.Count();

@@ -3,98 +3,119 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-<div class="span10">
-    <div class="span4">
-        <ul class="widget widget-usage unstyled span4">
-            <li>
-                <p>
-                    <strong>Software</strong> <span class="pull-right small muted">@ViewBag.persoft%</span>
-                </p>
-                <div class="progress tight">
-                    <div class="bar" style="width:@(ViewBag.persoft)%;">
+    <div class="span10">
+        <div class="span3">
+            <ul class="widget widget-usage unstyled span3">
+                <li>
+                    <p>
+                        <strong>Software</strong> <span class="pull-right small muted">@ViewBag.persoft%</span>
+                    </p>
+                    <div class="progress tight">
+                        <div class="bar" style="width:@(ViewBag.persoft)%;">
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <p>
-                    <strong>Hardware</strong> <span class="pull-right small muted">@ViewBag.perhard%</span>
-                </p>
-                <div class="progress tight">
-                    <div class="bar bar-success" style="width:@(ViewBag.perhard)%;">
+                </li>
+                <li>
+                    <p>
+                        <strong>Hardware</strong> <span class="pull-right small muted">@ViewBag.perhard%</span>
+                    </p>
+                    <div class="progress tight">
+                        <div class="bar bar-success" style="width:@(ViewBag.perhard)%;">
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <p>
-                    <strong>Network</strong> <span class="pull-right small muted">@ViewBag.pernet%</span>
-                </p>
-                <div class="progress tight">
-                    <div class="bar bar-warning" style="width:@(ViewBag.pernet)%;">
+                </li>
+                <li>
+                    <p>
+                        <strong>Network</strong> <span class="pull-right small muted">@ViewBag.pernet%</span>
+                    </p>
+                    <div class="progress tight">
+                        <div class="bar bar-warning" style="width:@(ViewBag.pernet)%;">
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li>
-                <p>
-                    <strong>Database</strong> <span class="pull-right small muted">@ViewBag.perdb%</span>
-                </p>
-                <div class="progress tight">
-                    <div class="bar bar-danger" style="width:@(ViewBag.perdb)%;">
+                </li>
+                <li>
+                    <p>
+                        <strong>Database</strong> <span class="pull-right small muted">@ViewBag.perdb%</span>
+                    </p>
+                    <div class="progress tight">
+                        <div class="bar bar-danger" style="width:@(ViewBag.perdb)%;">
+                        </div>
                     </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="span2">
-        <a href="#" class="btn-box big span2">
-            <i class="icon-user"></i><b>@ViewBag.usernber</b>
-            <p class="text-muted">
-                Total Users
-            </p>
-        </a>
-    </div>
-    <div class="span2">
-        <a href="#" class="btn-box big span2">
-            <i class=" icon-bell"></i><b>@ViewBag.incnber</b>
-            <p class="text-muted">
-                Incidents
-            </p>
-        </a>
-    </div>
-</div>
-<div class="span10">
-    
-    
-</div>
-<div class="span10">
-    <div class="module">
-        <div class="module-head">
-            <h3>
-               Incidents by Category
-            </h3>
+                </li>
+            </ul>
         </div>
-        <div class="module-body">
-            <canvas id="myChart" width="838" height="300"></canvas>
+        <div class="span2">
+            <a href="#" class="btn-box big span2">
+                <i class="icon-user"></i><b>@ViewBag.usernber</b>
+                <p class="text-muted">
+                    Total Users
+                </p>
+            </a>
+        </div>
+        <div class="span2">
+            <a href="#" class="btn-box big span2">
+                <i class=" icon-bell"></i><b>@ViewBag.incnber</b>
+                <p class="text-muted">
+                    Total Incidents
+                </p>
+            </a>
+        </div>
+        <div class="span2">
+            <a href="#" class="btn-box big span2">
+                <i class=" icon-bell"></i><b>@ViewBag.newinc</b>
+                <p class="text-muted">
+                    New Incidents
+                </p>
+            </a>
+        </div>
+    </div>
+    <div class="span10">
+
+
+    </div>
+    <div class="span10">
+        <div class="module">
+            <div class="module-head">
+                <h3>
+                    Incidents by Category
+                </h3>
+            </div>
+            <div class="module-body">
+                <canvas id="myChart" width="838" height="300"></canvas>
 
             </div>
         </div>
-        </div>
-        }
-        else
-        {
-
-        <div class="card">
-            <div class="card-body text-center">
-                <div class="mb-4">
-                    <i class="feather icon-mail auth-icon"></i>
-                </div>
-                <h3 class="mb-4"><a href="/Identity/Account/Login">Sign In</a></h3>
-                <p class="mb-0 text-muted">Don’t have an account? <a href="/Identity/Account/Register">Signup</a></p>
+    </div>
+    <div class="span10">
+        <div class="module">
+            <div class="module-head">
+                <h3>
+                    Incidents by State
+                </h3>
             </div>
-        </div>}
+            <div class="module-body">
+                <canvas id="myChart1" width="838" height="300"></canvas>
 
-        @section scripts{
+            </div>
+        </div>
+    </div>
+}
+else
+{
 
-            <script>
+    <div class="card">
+        <div class="card-body text-center">
+            <div class="mb-4">
+                <i class="feather icon-mail auth-icon"></i>
+            </div>
+            <h3 class="mb-4"><a href="/Identity/Account/Login">Sign In</a></h3>
+            <p class="mb-0 text-muted">Don’t have an account? <a href="/Identity/Account/Register">Signup</a></p>
+        </div>
+    </div>}
+
+@section scripts{
+
+    <script>
                 const ctx = document.getElementById('myChart').getContext('2d');
                 const myChart = new Chart(ctx, {
                     type: 'bar',
@@ -133,6 +154,47 @@
         }
                 });
 
-                </script>
+    </script>
 
+    <script>
+                const ctx1 = document.getElementById('myChart1').getContext('2d');
+                const myChart1 = new Chart(ctx1, {
+                    type: 'pie',
+                    data: {
+                        labels: ['New', 'In progress', 'Resolved', 'Canceled', 'On Hold', 'Closed'],
+                        datasets: [{
+                            label: '# of Votes',
+                            /**/
+                            data: [@ViewBag.newinc, @ViewBag.inproginc, @ViewBag.resolvedinc, @ViewBag.cancledinc, @ViewBag.onholdinc, @ViewBag.closedinc],
+                /**/
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
+                });
+
+    </script>
+
+}

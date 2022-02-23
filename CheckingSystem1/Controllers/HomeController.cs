@@ -33,6 +33,42 @@ namespace CheckingSystem.Controllers
             incident = _context.Incidents.ToList();
             int incnber = _context.Incidents.Count();
             ViewBag.incnber = incnber;
+            int newinc = 0;
+            int inproginc = 0;
+            int resolvedinc = 0;
+            int closedinc = 0;
+            int onholdinc = 0;
+            int cancledinc = 0;
+            foreach (var item in incident)
+            {
+                if(item.state.ToString()=="new")
+                {
+                    newinc = newinc + 1;
+                }
+               else if (item.state.ToString() == "In Progress")
+                {
+                    inproginc = inproginc + 1;
+                }
+                else if (item.state.ToString() == "resolved")
+                {
+                    resolvedinc = resolvedinc + 1;
+                }
+                else if (item.state.ToString() == "On hold")
+                {
+                    onholdinc = onholdinc + 1;
+                }
+                else
+                {
+                    cancledinc = cancledinc + 1;
+                }
+            }
+            ViewBag.newinc = newinc;
+            ViewBag.inproginc = inproginc;
+            ViewBag.resolvedinc = resolvedinc;
+            ViewBag.closedinc = closedinc;
+            ViewBag.cancledinc = cancledinc;
+            ViewBag.onholdinc = onholdinc;
+
             int soft = 0;
             int hard = 0;
             int db = 0;

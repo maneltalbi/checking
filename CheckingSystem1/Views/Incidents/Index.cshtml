@@ -13,6 +13,7 @@
         pageNo = pager.CurrentPage;
     }
 }
+
 <link type="text/css" href="~/assets/css/_pagination.scss" rel='stylesheet'>
 
 <br />
@@ -34,10 +35,10 @@
     </div>
 
 <div class="span10">
-    <table class="table table-striped table-bordered table-condensed">
+    <table class="table table-striped table-bordered  table-hover">
         <thead>
             <tr>
-                <th>sno</th>
+               
                 <th>
                     @Html.DisplayNameFor(model => model.Number)
                 </th>
@@ -85,7 +86,7 @@
             {
                 intsno = intsno + 1;
             <tr>
-                <td>@intsno</td>
+               
                 <td>
                     @Html.DisplayFor(modelItem => item.Number)
                 </td>
@@ -141,9 +142,9 @@
                     @Html.DisplayFor(modelItem => item.AssignementTo.LastName)
                 </td>
                 <td align="center">
-                    <a asp-action="Edit" asp-route-id="@item.IdInc" class="btn btn-success"><i class="fa-thin fa-pen-to-square"></i>Edit</a>
+                    <a asp-action="Edit" asp-route-id="@item.IdInc" ><i class="icon-edit"></i></a>
 
-                    <a asp-action="Delete" asp-route-id="@item.IdInc" class="btn btn-danger">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdInc"><i class="bi bi-trash"></i></a>
                 </td>
             </tr>
             }

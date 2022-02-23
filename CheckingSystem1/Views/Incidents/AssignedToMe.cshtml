@@ -112,9 +112,9 @@
                             @Html.DisplayFor(modelItem => item.AssignementTo.FirstName)
                         </td>
                         <td align="center">
-                            <a asp-action="Edit" asp-route-id="@item.IdInc" class="btn btn-success"><i class="fa-thin fa-pen-to-square"></i>Edit</a>
+                            <a asp-action="Edit" asp-route-id="@item.IdInc"><i class="icon-edit"></i></a>
 
-                            <a asp-action="Delete" asp-route-id="@item.IdInc" class="btn btn-danger">Delete</a>
+                            <a asp-action="Delete" asp-route-id="@item.IdInc" ><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 }

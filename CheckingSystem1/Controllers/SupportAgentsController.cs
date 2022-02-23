@@ -23,7 +23,10 @@ namespace CheckingSystem.Controllers
         {
             return View(await _context.SupportAgents.ToListAsync());
         }
-
+        public async Task<IActionResult> Profile()
+        {
+            return View(await _context.SupportAgents.ToListAsync());
+        }
         // GET: SupportAgents/Details/5
         public async Task<IActionResult> Details(int? id)
         {

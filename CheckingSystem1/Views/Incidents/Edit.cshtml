@@ -109,13 +109,14 @@
             </div>
         </div>
 
-        
-        </div>
-    </center>
 
-        @section Scripts {
-            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-        }
+    </div>
+</center>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
 <script>
 
     $(function () {

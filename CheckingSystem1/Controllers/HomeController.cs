@@ -29,8 +29,7 @@ namespace CheckingSystem.Controllers
             
             int usernber = _context.Users.Count();
             ViewBag.usernber = usernber;
-            List<Incidents> incident;
-            incident = _context.Incidents.ToList();
+            List<Incidents> incident=_context.Incidents.ToList(); 
             int incnber = _context.Incidents.Count();
             ViewBag.incnber = incnber;
             int newinc = 0;

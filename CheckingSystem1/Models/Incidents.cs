@@ -11,15 +11,24 @@ namespace CheckingSystem1.Models
     {
         [Key]
         public int IdInc { get; set; }
+        
         public string Number { get; set; }
         public string Subcategory { get; set; }
+      
         public string BusinessService { get; set; }
+     
         public string Description { get; set; }
+      
         public string ContactType { get; set; }
+       
         public string state { get; set; }
+  
         public string priority { get; set; }
+      
         public string AssignementGroup { get; set; }
+      
         public DateTime Updatedate { get; set; }
+        
         public string UbdatedBy { get; set; }
         [ForeignKey("Category")]
         public int IdCat { get; set; }

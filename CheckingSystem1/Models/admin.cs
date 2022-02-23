@@ -10,8 +10,11 @@ namespace CheckingSystem1.Models
     {
         [Key]
         public int IdAdmin { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string Email { get; set; }
         public List<Incidents> Incident { get; set; }
     }

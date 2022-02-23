@@ -20,14 +20,14 @@
                     @Html.LabelFor(model => model.Number, htmlAttributes: new { @class = "control-label col-md-2" })
                     @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                     @Html.ValidationMessageFor(model => model.Number)
-                    <span asp-validation-for="Number" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    
-                        <label asp-for="Category" class="control-label"></label>
-                        <select id="ddlCategories" asp-for="IdCat" class="form-control" asp-items="@(new SelectList(ViewBag.CategoriesList,"Value","Text"))"></select>
 
-                    </div>
+                    <label asp-for="Category" class="control-label"></label>
+                    <select id="ddlCategories" asp-for="IdCat" class="form-control" asp-items="@(new SelectList(ViewBag.CategoriesList,"Value","Text"))"></select>
+                                        <span asp-validation-for="BusinessService" class="text-danger"></span>
+
+                </div>
                 <div class="form-group">
                     <label asp-for="Subcategory" class="control-label"></label>
                     <select id="ddlSubCategories" asp-for="Subcategory" class="form-control" asp-items="@(new SelectList(string.Empty, "Value","Text"))"></select>
@@ -61,6 +61,7 @@
                         <option value="Canceled">Canceled</option>
                         <option value="Resolved">Resolved</option>
                     </select>
+
                 </div>
                 <div class="form-group">
                     <label asp-for="priority" class="control-label"></label>
@@ -106,11 +107,12 @@
             </div>
         </form>
     </div>
-    </center>
+</center>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
 <script>
 
     $(function () {

@@ -11,7 +11,9 @@ namespace CheckingSystem1.Models
     {
         [Key]
         public int IdSubCat { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
         [ForeignKey("Category")]
         public int IdCat { get; set; }

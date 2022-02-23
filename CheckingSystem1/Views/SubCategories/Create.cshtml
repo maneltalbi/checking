@@ -1,11 +1,10 @@
 ﻿@model CheckingSystem1.Models.SubCategories
 
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = "Create";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-<br/><br />
+<br />
+<br />
 <div class="span10">
     <h1 align="center">Create</h1>
 
@@ -39,6 +38,9 @@
             </div>
         </div>
 
-       
-        </div>
+
     </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

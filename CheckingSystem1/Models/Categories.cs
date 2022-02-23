@@ -10,7 +10,9 @@ namespace CheckingSystem1.Models
     {
         [Key]
         public int IdCat { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
         public List<SubCategories> SubCategories { get; set; }
         public List<Incidents> Incident { get; set; }

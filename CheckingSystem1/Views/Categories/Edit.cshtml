@@ -1,9 +1,7 @@
 ﻿@model CheckingSystem1.Models.Categories
 
-@{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = "Edit";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <br />
 <br />
@@ -37,5 +35,8 @@
             </div>
         </div>
 
-</div>
     </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

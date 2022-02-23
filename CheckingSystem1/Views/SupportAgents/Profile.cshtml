@@ -6,29 +6,32 @@
 {
     @if (User.Identity.Name == item.Email)
     {
-        <div class="media user">
-            <a class="media-avatar pull-left" href="#">
-                <img src="~/images/user.png">
-            </a>
-            <div class="media-body">
-                <h3 class="media-title">
-                    Your Profile
-                </h3>
-                <p>
-                    <small class="muted">Last Name: @item.LastName</small></p>
-                  <p>  <small class="muted">First Name: @item.FirstName</small></p>
-                  <p>  <small class="muted"> Email:@item.Email </small>
-                    
+        <div class="row-fluid">
+            <div class="media user">
+                <a class="media-avatar pull-left" href="#">
+                    <img src="~/images/user.png">
+                </a>
+                <div class="media-body">
+                    <h3 class="media-title">
+                        Your Profile
+                    </h3>
+                    <p>
+                        <small class="muted">Last Name: @item.LastName</small>
+                    </p>
+                    <p>  <small class="muted">First Name: @item.FirstName</small></p>
+                    <p>
+                        <small class="muted"> Email:@item.Email </small>
+
                     </p>
                     <div class="media-option btn-group shaded-icon">
                         <a asp-action="Edit" asp-route-id="@item.IdAgent"><i class="icon-edit"></i></a>
-                        
+
                     </div>
-</div>
-        </div>
+                </div>
+            </div>
+            </div>
 
-       
-    }
+            }
 
 
-}
+            }

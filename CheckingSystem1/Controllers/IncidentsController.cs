@@ -72,6 +72,11 @@ namespace CheckingSystem1.Controllers
             var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
             return View(await checkingSystemDBContext.ToListAsync());
         }
+        public async Task<IActionResult> Map()
+        {
+            var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
+            return View(await checkingSystemDBContext.ToListAsync());
+        }
 
         public async Task<IActionResult> AssignedToMe()
         {
@@ -101,7 +106,7 @@ namespace CheckingSystem1.Controllers
             }
             else
             {
-                inc.Number = "INC" + (Convert.ToInt32(lastincident.Number.Substring(6, lastincident.Number.Length - 6)) + 1).ToString("D4");
+                inc.Number = "INC" + (Convert.ToInt32(lastincident.Number.Substring(5, lastincident.Number.Length - 5)) + 1).ToString("D4");
             }
             DataSet ds = dbop.GetCategories();
             List<SelectListItem> list = new List<SelectListItem>();

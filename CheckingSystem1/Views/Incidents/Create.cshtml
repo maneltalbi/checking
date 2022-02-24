@@ -24,13 +24,16 @@
                 <div class="form-group">
 
                     <label asp-for="Category" class="control-label"></label>
-                    <select id="ddlCategories" asp-for="IdCat" class="form-control" asp-items="@(new SelectList(ViewBag.CategoriesList,"Value","Text"))"></select>
-                                        <span asp-validation-for="BusinessService" class="text-danger"></span>
+                    <select id="ddlCategories" asp-for="IdCat" class="form-control" asp-items="@(new SelectList(ViewBag.CategoriesList,"Value","Text"))">
+                    </select>
+                     <span asp-validation-for="Category" class="text-danger"></span>
 
                 </div>
                 <div class="form-group">
                     <label asp-for="Subcategory" class="control-label"></label>
-                    <select id="ddlSubCategories" asp-for="Subcategory" class="form-control" asp-items="@(new SelectList(string.Empty, "Value","Text"))"></select>
+                    <select id="ddlSubCategories" asp-for="Subcategory" class="form-control" asp-items="@(new SelectList(string.Empty, "Value","Text"))">
+                    </select>
+                    <span asp-validation-for="Subcategory" class="text-danger"></span>
 
                 </div>
                 <div class="form-group">
@@ -54,13 +57,14 @@
                 <div class="form-group">
                     <label asp-for="state" class="control-label"></label>
                     <select asp-for="state" class="form-control">
-                        <option value="0">Select state:</option>
+                      
                         <option value="New">New</option>
                         <option value="In Progress">In Progress</option>
                         <option value="On hold">On hold</option>
                         <option value="Canceled">Canceled</option>
                         <option value="Resolved">Resolved</option>
                     </select>
+                    <span asp-validation-for="state" class="text-danger"></span>
 
                 </div>
                 <div class="form-group">
@@ -89,15 +93,26 @@
 
                 <div class="form-group">
                     <label asp-for="IdUser" class="control-label">Caller</label>
-                    <select asp-for="IdUser" class="form-control" asp-items="ViewBag.IdUser"></select>
+                    <select asp-for="IdUser" class="form-control" asp-items="ViewBag.IdUser">
+                       
+                    </select>
+                    <span asp-validation-for="IdUser" class="text-danger"></span>
+
                 </div>
                 <div class="form-group">
                     <label asp-for="Idadmin" class="control-label">Admin</label>
-                    <select asp-for="Idadmin" class="form-control" asp-items="ViewBag.Idadmin"></select>
+                    <select asp-for="Idadmin" class="form-control" asp-items="ViewBag.Idadmin">
+                        
+                    </select>
+                    <span asp-validation-for="Idadmin" class="text-danger"></span>
+
                 </div>
                 <div class="form-group">
                     <label asp-for="IdAgent" class="control-label">AssignedTO</label>
-                    <select asp-for="IdAgent" class="form-control" asp-items="ViewBag.IdAgent"></select>
+                    <select asp-for="IdAgent" class="form-control" asp-items="ViewBag.IdAgent">
+                        
+                    </select>
+                    <span asp-validation-for="IdAgent" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">

@@ -40,7 +40,7 @@ namespace CheckingSystem.Controllers
             int cancledinc = 0;
             foreach (var item in incident)
             {
-                if(item.state.ToString()=="new")
+                if(item.state.ToString()=="New")
                 {
                     newinc = newinc + 1;
                 }
@@ -48,7 +48,7 @@ namespace CheckingSystem.Controllers
                 {
                     inproginc = inproginc + 1;
                 }
-                else if (item.state.ToString() == "resolved")
+                else if (item.state.ToString() == "Resolved")
                 {
                     resolvedinc = resolvedinc + 1;
                 }
@@ -56,9 +56,13 @@ namespace CheckingSystem.Controllers
                 {
                     onholdinc = onholdinc + 1;
                 }
-                else
+                else if (item.state.ToString() == "Canceled")
                 {
                     cancledinc = cancledinc + 1;
+                }
+                else
+                {
+                    closedinc = closedinc + 1;
                 }
             }
             ViewBag.newinc = newinc;

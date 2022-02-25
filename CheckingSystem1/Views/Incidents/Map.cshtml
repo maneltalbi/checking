@@ -1,24 +1,94 @@
-﻿<style>
+﻿<script src="~/scripts/jquery-3.2.1.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBkTqPgbRNbpGvJHWF-v26q7MZIu-XXD0Y&language=en&region=US"></script>
+
+<style>
     /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
     #map {
-        height: 400px;
-        width: 400px;
+        height: 600px;
+        width: 100%;
     }
-
 </style>
 <div class="span10">
-    <div id="map"></div>
-    <script>
-        let map;
+    <div id="map-dialog1">
+        <input id="pac-input" class="controls" type="text" placeholder="Search For Keywords"/>
+        <input type="button" class="btn btn-primary search-btn" id="searchid" value="Search" />
+        <div id="model-map2" style="height: 76%;width:74%; position:absolute;overflow:hidden;">
 
-        function initMap() {
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 8,
-            });
-        }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-QRc4EpVhv3MFjO3sn4xEzTShzD0pT7g&callback=initMap&v=weekly"
-            async></script>
+        </div>
+    </div>
 </div>
+<script>
+    var uluru = { lat: 35.829300, lng: 10.640630 };
+    var map = new google.maps.Map(document.getElementById('model-map2'), {
+        zoom: 13,
+        center: uluru,
+        mapTypeIds: google.maps.MapTypeId.HYBRID,
+        zoomControl: true,
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.LEFT_BOTTOM
+        },
+        streetViewControl: true,
+        streetViewControlOPtions: {
+            position: google.maps.ControlPosition.LEFT_BOTTOM
+        },
+        
+        mapTypeControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_CENTER
+        },
+    });
+    var trafficLayer = new google.maps.trafficLayer();
+    trafficLayer.setMap(map);
+
+    var input = document.getElementById('pac-input');
+    var button = document.getElementById('searchid');
+    var searchBox = new google.maps.searchBox(input);
+    //pushing control on the map
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(button);
+    document.getElementById('searchid').onclick = function () {
+        google.maps.event.trigger(input, 'focus')
+        google.maps.event.trigger(input, 'keydown', { keyCode: 13 });
+    };
+    var markers = [];
+    searchBox.addListener('places_changed', function () {
+        var places = searchBox.getPlaces();
+        if (places.length == 0) {
+            return;
+        }
+        markers.forEach(function (marker) {
+            marker.setMap(null);
+        });
+        markers = [];
+        // for each place,get the icon, name and location.
+        var bounds = new google.maps.LatLngBounds();
+        //debugger;
+        places.forEach(function (place) {
+            if (!place.geometry) {
+                console.log("Returned place contains no geometry");
+                return;
+            }
+            var icon = {
+                url: place.icon,
+                size: new google.maps.Size(71, 71),
+                origin: new google.maps.point(0, 0),
+                anchoir: new google.maps.Point(17, 34),
+                scaledSize: new google.maps.Size(25, 25)
+            };
+            //create marker for each place.
+            markers.push(new google.maps.Marker({
+                map: map,
+                icon: icon,
+                title: place.name,
+                title: place.name,
+                position: place.geometry.location
+            }));
+            if (place.geometry.viewport) {
+                bounds.union(place.geometry.viewport);
+            } else {
+                bounds.extend(place.geometry.location);
+            }
+        });
+        map.fitBounds(bounds);
+    });
+</script>

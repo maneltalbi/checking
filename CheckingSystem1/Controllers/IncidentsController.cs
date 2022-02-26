@@ -77,7 +77,11 @@ namespace CheckingSystem1.Controllers
             var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
             return View(await checkingSystemDBContext.ToListAsync());
         }
-
+        public JsonResult GetAllLocation()
+        {
+            var data = _context.GoogleMap.ToList();
+            return Json(data);
+        }
         public async Task<IActionResult> AssignedToMe()
         {
             ViewBag.subcatlist = _context.SubCategories.ToList();

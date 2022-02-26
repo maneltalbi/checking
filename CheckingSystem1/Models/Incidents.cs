@@ -48,5 +48,9 @@ namespace CheckingSystem1.Models
        
         public SupportAgents AssignementTo { get; set; }
 
+        [ForeignKey("Address")]
+        public int IdMap { get; set; }
+       public GoogleMap Address { get; set; }
+
     }
 }

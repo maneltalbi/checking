@@ -18,8 +18,8 @@ namespace CheckingSystem1.Models
         public DbSet<Users> Users { get; set; }
         public DbSet<SupportAgents> SupportAgents { get; set; }
         public DbSet<Incidents> Incidents { get; set; }
-        public DbSet<CheckingSystem1.Models.SubCategories> SubCategories { get; set; }
-
+        public DbSet<SubCategories> SubCategories { get; set; }
+        public DbSet<GoogleMap> GoogleMap { get; set; }
     }
 }
 

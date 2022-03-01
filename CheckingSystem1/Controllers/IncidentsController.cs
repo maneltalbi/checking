@@ -73,15 +73,18 @@ namespace CheckingSystem1.Controllers
             return View(await checkingSystemDBContext.ToListAsync());
         }
         public async Task<IActionResult> Map()
-        {
+        { 
             var checkingSystemDBContext = _context.Incidents.Include(i => i.AssignementTo).Include(i => i.Caller).Include(i => i.Category).Include(i => i.admin);
             return View(await checkingSystemDBContext.ToListAsync());
         }
         public JsonResult GetAllLocation()
         {
+            
             var data = _context.GoogleMap.ToList();
             return Json(data);
+                
         }
+       
         public async Task<IActionResult> AssignedToMe()
         {
             ViewBag.subcatlist = _context.SubCategories.ToList();
@@ -98,6 +101,7 @@ namespace CheckingSystem1.Controllers
             ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "LastName");
             ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "Name");
             ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "LastName");
+            ViewData["IdMap"] = new SelectList(_context.GoogleMap, "IdMap", "Address");
             Incidents inc = new Incidents();
             var lastincident = _context.Incidents.OrderByDescending(c => c.IdInc).FirstOrDefault();
             if (id != 0)
@@ -138,7 +142,7 @@ namespace CheckingSystem1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdInc,Number,Subcategory,BusinessService,Description,ContactType,state,priority,AssignementGroup,Updatedate,UbdatedBy,IdCat,IdUser,Idadmin,IdAgent")] Incidents incidents)
+        public async Task<IActionResult> Create([Bind("IdInc,Number,Subcategory,BusinessService,Description,ContactType,state,priority,AssignementGroup,Updatedate,UbdatedBy,IdCat,IdUser,Idadmin,IdAgent,IdMap")] Incidents incidents)
         {
             if (ModelState.IsValid)
             {
@@ -150,6 +154,7 @@ namespace CheckingSystem1.Controllers
             ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "LastName", incidents.IdUser);
             ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "Name", incidents.IdCat);
             ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "LastName", incidents.Idadmin);
+            ViewData["IdMap"] = new SelectList(_context.GoogleMap, "IdMap", "Address", incidents.IdMap);
             return View(incidents);
         }
 
@@ -170,6 +175,8 @@ namespace CheckingSystem1.Controllers
             ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "LastName", incidents.IdUser);
             ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "Name", incidents.IdCat);
             ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "LastName", incidents.Idadmin);
+            ViewData["IdMap"] = new SelectList(_context.GoogleMap, "IdMap", "Address", incidents.IdMap);
+
             DataSet ds = dbop.GetCategories();
             List<SelectListItem> list = new List<SelectListItem>();
             foreach (DataRow dr in ds.Tables[0].Rows)
@@ -185,7 +192,7 @@ namespace CheckingSystem1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdInc,Number,Subcategory,BusinessService,Description,ContactType,state,priority,AssignementGroup,Updatedate,UbdatedBy,IdCat,IdUser,Idadmin,IdAgent")] Incidents incidents)
+        public async Task<IActionResult> Edit(int id, [Bind("IdInc,Number,Subcategory,BusinessService,Description,ContactType,state,priority,AssignementGroup,Updatedate,UbdatedBy,IdCat,IdUser,Idadmin,IdAgent,IdMap")] Incidents incidents)
         {
             if (id != incidents.IdInc)
             {
@@ -216,6 +223,8 @@ namespace CheckingSystem1.Controllers
             ViewData["IdUser"] = new SelectList(_context.Users, "IdUser", "LastNAme", incidents.IdUser);
             ViewData["IdCat"] = new SelectList(_context.Categories, "IdCat", "Name", incidents.IdCat);
             ViewData["Idadmin"] = new SelectList(_context.admin, "IdAdmin", "LastName", incidents.Idadmin);
+            ViewData["IdMap"] = new SelectList(_context.GoogleMap, "IdMap", "Address", incidents.IdMap);
+
             return View(incidents);
         }
 

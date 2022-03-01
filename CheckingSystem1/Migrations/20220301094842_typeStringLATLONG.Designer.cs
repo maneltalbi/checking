@@ -4,14 +4,16 @@ using CheckingSystem1.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CheckingSystem1.Migrations
 {
     [DbContext(typeof(CheckingSystemDBContext))]
-    partial class CheckingSystemDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220301094842_typeStringLATLONG")]
+    partial class typeStringLATLONG
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

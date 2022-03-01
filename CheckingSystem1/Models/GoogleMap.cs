@@ -12,7 +12,7 @@ namespace CheckingSystem1.Models
         public int IdMap { get; set; }
         public Nullable<int> Rating { get; set; }
         public string Address { get; set; }
-        public double Lat { get; set; }
-        public Nullable<double> Long { get; set; }
+        public string Lat { get; set; }
+        public string Long { get; set; }
     }
 }

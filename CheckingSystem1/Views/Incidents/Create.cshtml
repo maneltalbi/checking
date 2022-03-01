@@ -94,15 +94,19 @@
                 <div class="form-group">
                     <label asp-for="IdUser" class="control-label">Caller</label>
                     <select asp-for="IdUser" class="form-control" asp-items="ViewBag.IdUser">
-                       
                     </select>
                     <span asp-validation-for="IdUser" class="text-danger"></span>
 
                 </div>
                 <div class="form-group">
+                    <label asp-for="IdMap" class="control-label">Address</label>
+                    <select asp-for="IdMap" class="form-control" asp-items="ViewBag.IdMap">
+                    </select>
+                    <span asp-validation-for="IdMap" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="Idadmin" class="control-label">Admin</label>
                     <select asp-for="Idadmin" class="form-control" asp-items="ViewBag.Idadmin">
-                        
                     </select>
                     <span asp-validation-for="Idadmin" class="text-danger"></span>
 
@@ -110,7 +114,6 @@
                 <div class="form-group">
                     <label asp-for="IdAgent" class="control-label">AssignedTO</label>
                     <select asp-for="IdAgent" class="form-control" asp-items="ViewBag.IdAgent">
-                        
                     </select>
                     <span asp-validation-for="IdAgent" class="text-danger"></span>
                 </div>

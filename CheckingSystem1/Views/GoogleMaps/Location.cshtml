@@ -1,0 +1,110 @@
+﻿
+@model CheckingSystem1.Models.GoogleMap
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlLuwEC9YvVCHAgHOCv-eNf64TBuLQRJg "></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/scripts/jquery-3.3.1.min.js"></script>
+<script src="~/scripts/bootstrap.min.js"></script>
+<script src="~/scripts/jquery.validate.min.js"></script>
+<script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("Location", "GoogleMaps", FormMethod.Post))
+{
+<div class="span10">
+    <div class="container py-4">
+        <h3 class="text-center">Location of Incidents</h3>
+        <div class="card">
+           
+            <div class="card-header bg-danger">
+            </div>
+            <div class="card-body">
+                <button style="margin-bottom:10px;" type="button" data-target="#myMap" data-toggle="modal" class="btn btn-danger btn-sm rounded-0"><i class="fa fa-plus-circle"></i> Add New Location</button>
+
+                <div class="modal fade" id="myMap">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add New Location</h4>
+                                <button type="button" class="close" data-dismiss="modal">×</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-4 col-xs-12" align="center">
+                                        <div class="form-group">
+                                            <label>Rating:</label>
+                                            @Html.EditorFor(model => model.Rating, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-xs-12" align="center">
+                                        <div class="form-group">
+                                            <label>Latitude:</label>
+                                            @Html.EditorFor(model => model.Lat, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Lat, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 col-xs-12" align="center">
+                                        <div class="form-group">
+                                            <label>Longitude:</label>
+                                            @Html.EditorFor(model => model.Long, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Long, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-4 col-xs-12" align="center">
+                                        <div class="form-group">
+                                            <label>Address:</label>
+                                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger rounded-0" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary rounded-0">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="dvMap" class="card" style="width: 97%; height: 550px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+<script type="text/javascript">
+
+        var markers = @Html.Raw(ViewBag.Markers);
+        window.onload = function () {
+            var mapOptions = {
+                center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                zoom: 12,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            for (i = 0; i < markers.length; i++) {
+                var data = markers[i]
+                var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: data.title
+                });
+                (function (marker, data) {
+                    google.maps.event.addListener(marker, "mouseover", function (e) {
+                        infoWindow.setContent(data.adr);
+                        infoWindow.open(map, marker);
+                    });
+                })(marker, data);
+                (function (marker, data) {
+                    google.maps.event.addListener(marker, "mouseout", function (e) {
+                        infoWindow.close();
+                    });
+                })(marker, data);
+            }
+        }
+</script>

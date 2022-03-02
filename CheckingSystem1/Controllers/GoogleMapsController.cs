@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CheckingSystem1.Models;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace CheckingSystem1.Controllers
 {
@@ -23,7 +26,56 @@ namespace CheckingSystem1.Controllers
         {
             return View(await _context.GoogleMap.ToListAsync());
         }
+        public ActionResult Location()
+        {
+            string markers = "[";
+           
+            using (SqlConnection con = new SqlConnection("Server=.;Database=CheckingSystem;Trusted_Connection=True;MultipleActiveResultSets=true"))
+            {
+                SqlCommand cmd = new SqlCommand("spGetMap", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                SqlDataReader sdr = cmd.ExecuteReader();
+                while (sdr.Read())
+                {
+                    markers += "{";
+                    markers += string.Format("'rat': '{0}',", sdr["Rating"]);
+                    markers += string.Format("'adr': '{0}',", sdr["Address"]);
+                    markers += string.Format("'lat': '{0}',", sdr["Lat"]);
+                    markers += string.Format("'lng': '{0}'", sdr["Long"]);
+                    markers += "},";
+                }
+            }
+            markers += "];";
+            ViewBag.Markers = markers;
+            List<Incidents> list = new List<Incidents>();
+            list = _context.Incidents.ToList();
+            ViewBag.list = list;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Location(GoogleMap location)
+        {
+            if (ModelState.IsValid)
+            {
+            using (SqlConnection con = new SqlConnection("Server=.;Database=CheckingSystem;Trusted_Connection=True;MultipleActiveResultSets=true"))
+                {
+                    SqlCommand cmd = new SqlCommand("spAddNewLocation", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.Parameters.AddWithValue("@Rating", location.Rating);
+                    cmd.Parameters.AddWithValue("@Address", location.Address);
+                    cmd.Parameters.AddWithValue("@Lat", location.Lat);
+                    cmd.Parameters.AddWithValue("@Long", location.Long);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            else
+            {
 
+            }
+            return RedirectToAction("Location");
+        }
         // GET: GoogleMaps/Details/5
         public async Task<IActionResult> Details(int? id)
         {

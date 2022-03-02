@@ -48,9 +48,6 @@ namespace CheckingSystem1.Controllers
             }
             markers += "];";
             ViewBag.Markers = markers;
-            List<Incidents> list = new List<Incidents>();
-            list = _context.Incidents.ToList();
-            ViewBag.list = list;
             return View();
         }
         [HttpPost]
